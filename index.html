@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Simon Dice</title>
+    <link rel="icon" type="image/png" href="img/icono.png"  />
+    <style>
+      body {
+        margin: 0;
+        background: #dedede;
+      }
+      .color {
+        width: 50%;
+        height: 50%;
+        display: inline-block;
+      }
+
+      .left {
+        float: left;
+      }
+
+      .right {
+        float: left;
+      }
+
+      .celeste {
+        background: #22a6b3;
+      }
+
+      .celeste.light {
+        background: #7ed6df;
+      }
+
+      .violeta {
+        background: #be2edd;
+      }
+
+      .violeta.light {
+        background: #e056fd;
+      }
+
+      .naranja {
+        background: #f0932b;
+      }
+
+      .naranja.light {
+        background: #ffbe76;
+      }
+
+      .verde {
+        background: #6ab04c;
+      }
+
+      .verde.light {
+        background: #badc58;
+      }
+      .thegame{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        margin: 2em 0 2em 0;
+      }
+      .gameboard {
+        height: 60vh;
+        width: 60vh;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto;
+        grid-column-start: 1;
+        grid-row: 1;
+      }
+
+      .btn-start {
+        width: 400px;
+        height: 100px;
+        background: #ecf0f1;
+        color: #2c3e50;
+        z-index: 1;
+        font-size: 2.5rem;
+        grid-column-start: 1;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+        border-radius: 2em;
+      }
+      .hide {
+        display: none;
+      }
+      .header{
+        background-color: #1b262c;
+        color: #dedede;
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+        align-items: center;
+      }
+      .header a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0 .7em;
+      }
+      .header h2, h1{
+        margin: 0;
+      }
+      .item:nth-of-type(2){
+        grid-column: 3;
+        grid-row: 1;
+      }
+      .logo {
+        height: 3em;
+        margin: 1em 0 1em 0;
+      }
+      
+
+
+      .container {
+        width: 90%;
+        margin: 0 auto;
+        display: inherit;
+        justify-content: inherit;
+        align-items: inherit;
+        height: inherit;
+        flex-wrap: inherit;
+      }
+      .container p{
+        font-size: 1.5em;
+      }
+      
+      .contact {
+        background-color: #3282b8;
+        color: white;
+        height: 8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }  
+      .social-link {
+        display: inline-block;
+        width: 5em;
+        height: 5em;
+        margin: 0 1em;
+        background-size: 5em 5em;
+      }
+      .social-link.twitter {
+        background-image: url('img/twitter.svg');
+      }
+      .social-link.facebook {
+        background-image: url('img/facebook.svg');
+      }
+      .social-link.github {
+        background-image: url('img/github.svg');
+      }
+      .social-link.instagram {
+        background-image: url('img/instagram.svg');
+      }
+      .social-link.linkedin {
+        background-image: url('img/linkedin.svg');
+      }       
+      .footer {
+        color: white;
+        background-color: #1b2127;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 4em;
+      }
+      .footer a {
+        color: white;
+      }
+      
+      .footer p{
+        padding: 0;
+        margin: 0;
+      }
+
+      @media screen and (max-width: 1280px){
+        body {
+          font-size: 14px;
+        }
+      }
+      @media screen and (max-width: 710px){
+
+        body {
+          font-size: 13px;
+        }
+        .logo {
+          height: 1.8em;
+        }
+        .header{
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr;
+          grid-auto-flow: row;
+        }
+        .item:nth-of-type(2){
+          grid-column: 2;
+          grid-row: 1;
+        }
+        .item:nth-of-type(3){
+          grid-column: 1 / span 2 ;
+          grid-row: 2;
+          justify-content: center;
+        }
+        .social-link {
+          display: inline-block;
+          width: 2em;
+          height: 2em;
+          margin: 0 1em;
+          background-size: 2em 2em;
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="item">
+        <a href="http://www.davidsiltroy.com">
+        <img class="logo" src="img/logo.png" alt="">
+      </a>
+      </div>
+      <div class="item">
+        <a href="#">
+          <h2>code in github</h2>
+        </a>
+      </div>
+      <div class="item">
+        <h1 class="item">Juego de Simon Dice</h1>
+      </div>
+    </div>
+    <section id="description" class="description">
+      <div class="container">
+        <p>Veamos qué tan buena memoria tienes al presionar la misma secuencia mostrada. <br> 
+          Actualmente el juego tiene 10 niveles, empezarás con el nivel 1 y a medida que avances tendrás que recordar más colores en la secuencia. <br>
+          Espero te diviertas! 😄 </p>
+      </div>
+    </section>
+    <div class="thegame">
+      <div class="gameboard">
+        <div id="celeste" class="color celeste left" data-color="celeste"></div>
+        <div id="violeta" class="color violeta right" data-color="violeta"></div>
+        <div id="naranja" class="color naranja left" data-color="naranja"></div>
+        <div id="verde" class="color verde right" data-color="verde"></div>
+      </div>
+      <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">Empezar a jugar!</button>
+      
+    </div>
+    
+    <section id="contacto" class="contact">
+      <div class="container">
+        <div class="social">
+          <a href="https://twitter.com/davidsiltroy" class="social-link twitter"></a>
+          <a href="https://facebook.com/davidsiltroy" class="social-link facebook"></a>
+          <a href="https://github.com/davidsiltroy" class="social-link github"></a>
+          <a href="https://instagram.com/davidsiltroy" class="social-link instagram"></a>
+          <a href="https://www.linkedin.com/in/david-alexander-silva-troya-0aa11176/" class="social-link linkedin"></a>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="container">
+        <div>
+          <p>www.davidsiltroy.com</p>
+        </div>
+        <div>
+          <p>
+            © 2021 davidsiltroy. Todos los derechos reservados
+          </p>
+        </div>
+      </div>
+    </footer>
+
+
+
+
+
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+      const celeste = document.getElementById('celeste')
+      const violeta = document.getElementById('violeta')
+      const naranja = document.getElementById('naranja')
+      const verde = document.getElementById('verde')
+      const btnEmpezar = document.getElementById('btnEmpezar')
+      const ULTIMO_NIVEL = 10
+
+      class Juego {
+        constructor() {
+          this.inicializar = this.inicializar.bind(this)
+          this.inicializar()
+          this.generarSecuencia()
+          setTimeout(()=>{
+            this.siguienteNivel()}
+           , 800)  
+        }
+        inicializar() {
+          this.elegirColor = this.elegirColor.bind(this)
+          this.siguienteNivel = this.siguienteNivel.bind(this)
+          this.toggleBtnEmpezar()
+          this.nivel = 1
+          this.colores = {
+            celeste,
+            violeta,
+            naranja,
+            verde
+          }
+        }
+        toggleBtnEmpezar(){
+          if(btnEmpezar.classList.contains('hide')){
+            btnEmpezar.classList.remove('hide')
+          }else{
+            btnEmpezar.classList.add('hide')
+          }
+        }
+        generarSecuencia(){
+          this.secuencia = new Array(ULTIMO_NIVEL).fill(0).map(n => Math.floor(Math.random() * 4))
+        }
+        transforarNumeroAColor(numero){
+          switch(numero){
+            case 0:
+              return 'celeste'
+            case 1:
+              return 'violeta'
+            case 2:
+              return 'naranja'
+            case 3:
+              return 'verde'
+          }
+        }
+        transforarColorANumero(color){
+          switch(color){
+            case "celeste":
+              return 0
+            case "violeta":
+              return 1
+            case "naranja":
+              return 2
+            case "verde":
+              return 3
+          }
+        }
+        iluminarSecuencia(){
+          for(let i = 0; i<this.nivel; i++){
+              const color = this.transforarNumeroAColor(this.secuencia[i])
+              setTimeout(()=> this.iluminarColor(color), 1000 * i)
+              
+          }
+        }
+        iluminarColor(color){
+          this.colores[color].classList.add('light')
+          setTimeout(()=> this.apagarColor(color),350)
+        }
+        apagarColor(color){
+          this.colores[color].classList.remove('light')
+        }
+        siguienteNivel(){
+          this.subnivel = 0
+          this.iluminarSecuencia()
+          this.agregarEventosClick()
+        }
+        elegirColor(ev){
+          const nombreColor = ev.target.dataset.color
+          const numeroColor = this.transforarColorANumero(nombreColor)
+          this.iluminarColor(nombreColor)
+         
+          if(numeroColor === this.secuencia[this.subnivel]){
+            this.subnivel++
+            if(this.subnivel===this.nivel){
+              this.nivel++
+              this.eliminarEventosClick()
+              if(this.nivel === ULTIMO_NIVEL+1){
+                this.ganoElJuego()
+              }else{
+                setTimeout(()=>this.siguienteNivel(),1200)
+                
+              }
+            }
+          }else{
+            this.peridoElJuego()
+          }
+
+        }
+        agregarEventosClick(){
+          this.colores.celeste.addEventListener('click', this.elegirColor)
+          this.colores.naranja.addEventListener('click', this.elegirColor)
+          this.colores.verde.addEventListener('click', this.elegirColor)
+          this.colores.violeta.addEventListener('click', this.elegirColor)
+        }
+        eliminarEventosClick(){
+          this.colores.celeste.removeEventListener('click', this.elegirColor)
+          this.colores.naranja.removeEventListener('click', this.elegirColor)
+          this.colores.verde.removeEventListener('click', this.elegirColor)
+          this.colores.violeta.removeEventListener('click', this.elegirColor)
+        }
+        ganoElJuego(){
+          swal("Juego de simon dice", "Eres increíble, has ganado!!", "success")
+          .then(()=> this.inicializar())
+        }
+        peridoElJuego(){
+          swal("Juego de simon dice", "Oh, te has equivocado.. vuelve a jugar", "error")
+          .then(()=>{
+            this.eliminarEventosClick()
+            this.inicializar()
+          })
+        }
+        
+      }
+
+      function empezarJuego() {
+        var juego = new Juego()
+        document.getElementById('description').classList.add('hide')
+
+      }
+    </script>
+  </body>
+</html>
