@@ -2,13 +2,14 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
     <title>Simon Dice</title>
     <link rel="icon" type="image/png" href="img/icono.png"  />
     <style>
       body {
         margin: 0;
         background: #dedede;
-        font-size: 26px;
+        font-size: 9px;
       }
       .color {
         width: 50%;
@@ -209,27 +210,34 @@
         font-size: 2em !important;
       }
       .swal-modal {
-        width: 55rem;
+        width: 18rem;
       }
       .swal-title {
-        font-size: 4.7rem;
+        font-size: 1.7rem;
       }
       .swal-text {
-        font-size: 2.7rem;
+        font-size: 1.2rem;
       }
       .swal-button {
-        font-size: 3rem;
+        font-size: 1.5rem;
       }
 
       @media (min-width: 768px) {
         body {
-          font-size: 17px;
+          font-size: 15px;
         }
         .header{
           height: 16vh;
         }
         .showgame{
-          height: 82vh;
+          height: 100vh;
+        }
+        .gameboard {
+          height: 60vh;
+          width: 60vh;
+        }
+        .swal-modal {
+          width: 33rem;
         }
       }
       
@@ -237,14 +245,49 @@
           body {
             font-size: 14px;
           }
+          .header{
+            height: 17vh;
+          }
+          .showgame{
+            height: 110vh;
+          }
+          .gameboard {
+            height: 80vh;
+            width: 80vh;
+          }
       }
-      
-      @media (min-width: 1200px) {
-        body {
-          font-size: 18px;
-        }
+      @media (min-width: 1021px) {
         .header{
           height: 20vh;
+        }
+        .githubcode{
+          width: 3em;
+          height: 3em;
+          background-size: 3em 3em;
+        }
+        .logo{
+          width: 16em;
+          height: 3em;
+          background-size: 17em 3em;
+          margin: 1em 0 0 1em;
+          background-image: url(img/logo.png);
+        }
+          
+      }
+      
+      @media (min-width: 1201px) {
+
+        .githubcode{
+          width: 5em;
+          height: 5em;
+          background-size: 5em 5em;
+        }
+        .logo{
+          width: 22em;
+          height: 4em;
+          background-size: 22em 4em;
+          margin: 1em 0 0 1em;
+          background-image: url(img/logo.png);
         }
           
       }
